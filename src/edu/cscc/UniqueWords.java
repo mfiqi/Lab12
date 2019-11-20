@@ -2,6 +2,7 @@ package edu.cscc;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Collections;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
@@ -18,21 +19,20 @@ public class UniqueWords {
      * @param myfile input file
      * @return sorted set of unique words
      */
-    public static Set<String> processDocument(File myfile) {
+    static Set<String> processDocument(File myfile) {
         TreeSet<String> parts = new TreeSet<>();
+
         try(Scanner input = new Scanner(myfile)) {
 
             while (input.hasNext()) {
                 String s = input.nextLine();
                 String[] words = tokenize(s);
 
-                for (String x : words) {
-                parts.add(x);
-                }
-
+                Collections.addAll(parts, words);
             }
 
-        } catch (FileNotFoundException e) {
+        }
+        catch (FileNotFoundException e) {
             System.out.println("Cannot Access File: " +myfile);
         }
 
